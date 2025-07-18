@@ -92,7 +92,7 @@ export default function RegressionPage() {
     const model = searchParams.get('model');
     if (model) {
         setSelectedModel(model);
-        console.log("Model selected from URL:", model);
+        //console.log("Model selected from URL:", model);
     }
     }, [searchParams]);
 
@@ -157,13 +157,13 @@ export default function RegressionPage() {
           });
       
           const result = await response.json();
-          console.log("Result:",result)
+          //console.log("Result:",result)
           setTrainingResults(prev => ({
             ...prev,
             [selectedModel]: result
           }));
         } catch (err) {
-          console.error("Training failed", err);
+          //console.error("Training failed", err);
           alert("Training failed: " + err);
         }
       };
