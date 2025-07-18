@@ -15,7 +15,7 @@ A full-stack web application to upload datasets, preprocess them, train machine 
 - Train multiple ML models
   - Classification & Regression support
 - Compare performance (accuracy, R², MSE, etc.)
-- 🖥Full-stack integration (React + FastAPI)
+- Full-stack integration (React + FastAPI)
 
 ---
 
