@@ -6,66 +6,72 @@ import { FlipWords } from "./components/ui/flip-words";
 
 export default function Home() {
     const words = ["Intelligence", "Insights", "Predictions", "Decisions"];
-    
+
     return (
-        <div className="flex flex-col bg-gradient-to-r from-black to-gray-800">
-            <Header></Header>
-            <div className="flex pl-50">
-                <div className="h-full w-[300px] flex flex-col  justify-center">
-                    <h2 className="text-5xl font-bold text-white pt-60 pl-2">Transform Data into </h2>
-                    <h2 className="text-5xl font-bold text-white">
-                        <span className="inline-block w-[240px]">
+        <div className="flex flex-col bg-gradient-to-r from-black to-gray-800 min-h-screen">
+            <Header />
+
+            {/* Hero Section */}
+            <div className="flex  flex-row items-center justify-between pt-auto lg:pt-18">
+                <div className="w-[40%] text-center text-left  mb-[3%]">
+                    <h2 className="text-3xl sm:text-5xl font-bold text-white break-words text-balance pl-[35%]">
+                        Transform Data into
+                    </h2>
+                    <h2 className="text-3xl sm:text-5xl font-bold text-white break-words text-balance pl-[33%]">
+                        <span className="inline-block max-w-[90%]  lg:mx-0">
                             <FlipWords words={words} />
                         </span>
                     </h2>
-
-                    <div className="mt-3">
+                    <div className="mt-6 pl-[35%]">
                         <Link href="/about">
-                            <button className="w-40 m-2 bg-gradient-to-r from-purple-600 to-purple-900 text-white-500 px-6 py-3 rounded-lg text-lg font-bold shadow-lg hover:scale-105 cursor-pointer">
+                            <button className=" bg-gradient-to-r from-purple-600 to-purple-900 text-white px-6 py-3 rounded-lg text-lg font-bold shadow-lg hover:scale-105 transition-transform ">
                                 Get Started
                             </button>
-                        </Link>                        
+                        </Link>
                     </div>
                 </div>
-                <div className="h-full w-188 flex items-center justify-center text-center ml-20 mr-20 mb-20 rounded-4xl z-10">
-                <BackgroundGradientAnimation>
-                    <div className=" flex  text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-5xl">
-                        <div className="bg-clip-text text-transparent drop-shadow-2xl bg-white">
-                            <p className="pr-30 pl-48 pt-62 text-right">
-                            Upload dataset, select model, let AI do the work.
+
+                {/* Right Animation Section */}
+                <div className="w-[60%] flex items-center justify-center h-full">
+                    <BackgroundGradientAnimation >
+
+                        <div className="text-white font-bold px-4 text-right text-2xl pl-[33%] mt-[59%] mr-[20%] sm:text-5xl sm:mt-[22%] h-full">
+                            <p className="bg-clip-text text-transparent bg-white drop-shadow-2xl ">
+                                Upload dataset, select model, let AI do the work.
                             </p>
                         </div>
-                    </div>
-                </BackgroundGradientAnimation>                 
+
+                    </BackgroundGradientAnimation >
                 </div>
             </div>
-            <div className="text-center">
 
-          
 
-          <div className=" text-white py-20 px-6">
-                <h2 className="text-center text-4xl font-bold mb-12">Why use NOCODE?</h2>
-                
+            {/* Features Section */}
+            <div className="text-center px-6 py-20">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12">Why use NOCODE?</h2>
                 <div className="flex flex-wrap justify-center gap-8">
-                    <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-80 text-center transition-transform duration-300 hover:scale-105">
+                    {/* Feature 1 */}
+                    <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-72 sm:w-80 text-center hover:scale-105 transition-transform">
                         <Upload size={40} className="text-purple-500 mx-auto" />
-                        <h3 className="text-xl font-bold mt-4">Easy Data Upload</h3>
+                        <h3 className="text-xl font-bold mt-4 text-white">Easy Data Upload</h3>
                         <p className="text-gray-400 mt-2">
                             Simply drag and drop your CSV files to start training your models.
                         </p>
                     </div>
 
-                    <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-80 text-center transition-transform duration-300 hover:scale-105">
+                    {/* Feature 2 */}
+                    <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-72 sm:w-80 text-center hover:scale-105 transition-transform">
                         <Cpu size={40} className="text-purple-500 mx-auto" />
-                        <h3 className="text-xl font-bold mt-4">Automated ML</h3>
+                        <h3 className="text-xl font-bold mt-4 text-white">Automated ML</h3>
                         <p className="text-gray-400 mt-2">
                             Our system automatically handles model training and optimization.
                         </p>
                     </div>
 
-                    <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-80 text-center transition-transform duration-300 hover:scale-105">
+                    {/* Feature 3 */}
+                    <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-72 sm:w-80 text-center hover:scale-105 transition-transform">
                         <BarChart3 size={40} className="text-purple-500 mx-auto" />
-                        <h3 className="text-xl font-bold mt-4">Visual Insights</h3>
+                        <h3 className="text-xl font-bold mt-4 text-white">Visual Insights</h3>
                         <p className="text-gray-400 mt-2">
                             Get clear visual reports and performance metrics for your models.
                         </p>
@@ -73,18 +79,17 @@ export default function Home() {
                 </div>
             </div>
 
-          <div className="mt-6 text-base text-neutral-500 dark:text-neutral-400 leading-relaxed ml-20 mr-20 mb-30">
-            <p>
-              Our platform empowers you to upload your data, choose from
-              state-of-the-art models, and let AI handle the training,
-              evaluation, and deployment.
-            </p>
-            <p className="mt-4">
-              Whether you&apos;re a student, researcher, or business, we make machine
-              learning accessible, fast, and intuitive.
-            </p>
-          </div>
-        </div>
+            {/* Final CTA Paragraph */}
+            <div className="text-neutral-400 text-base leading-relaxed px-6 lg:px-32 pb-20 text-center">
+                <p>
+                    Our platform empowers you to upload your data, choose from state-of-the-art
+                    models, and let AI handle the training, evaluation, and deployment.
+                </p>
+                <p className="mt-4">
+                    Whether you&apos;re a student, researcher, or business, we make machine
+                    learning accessible, fast, and intuitive.
+                </p>
+            </div>
         </div>
     );
 }

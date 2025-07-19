@@ -294,6 +294,7 @@ export default function Prep_class() {
         <div className="h-screen bg-gradient-to-r from-black to-gray-1000 text-white">
             <Header></Header>
             <div className="flex border-t border-t-gray-600 border-t-3 mt-18">
+                <div className="hidden md:block">
                 <aside className="w-72 min-w-72 p-6 flex-shrink-0 h-screen overflow-y-auto border-r border-r-gray-600 border-r-3">
                     <h2 className="text-xl font-bold text-white">Preprocessing Steps</h2>
                     <ul className="mt-4 space-y-4 text-gray-300">
@@ -304,6 +305,7 @@ export default function Prep_class() {
                         <li className="border border-gray-700 p-3 rounded-lg"><a  href="#Data Splitting">Data Splitting</a></li>
                     </ul>
                 </aside>
+                </div>
                 <main className="flex-1 p-8 overflow-auto h-screen">
                     <h1 className="text-3xl font-bold">Data Preprocessing</h1>
 

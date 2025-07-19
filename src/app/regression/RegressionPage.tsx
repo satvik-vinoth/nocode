@@ -85,6 +85,7 @@ export default function RegressionPage() {
     const { dataset, setDataset, datasetFile, setDatasetFile } = useDataset();
     const [trainingResults, setTrainingResults] = useState<Record<string, TrainingResult>>({});
     const result = trainingResults[selectedModel];
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     
       
@@ -173,7 +174,16 @@ export default function RegressionPage() {
     return (
         <div className=" h-screen bg-gradient-to-r from-black to-gray-1000">
             <Header></Header>
+            <div className="md:hidden px-4 py-20">
+            <button
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className="bg-white text-black px-4 py-2 rounded-lg font-bold"
+            >
+                {isSidebarOpen ? "Close Menu" : "Open Menu"}
+            </button>
+            </div>
             <div className="flex border-t border-t-gray-600 border-t-3 mt-18">
+            <div className="hidden md:block">
             <aside className="w-72 min-w-72 p-6 flex-shrink-0 h-screen overflow-y-auto">
                 <h2 className="text-xl font-bold text-white-500">Regression Models</h2>
                 <div className="mt-4 space-y-4">    
@@ -197,6 +207,45 @@ export default function RegressionPage() {
                     ))}
                 </div>
             </aside>
+            </div>
+
+            {isSidebarOpen && (
+                <div className="md:hidden fixed top-7 left-0 right-0 bottom-0 bg-black z-50 p-4 overflow-auto">
+                    <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-bold text-white">Regression Models</h2>
+                    <button
+                        onClick={() => setIsSidebarOpen(false)}
+                        className="text-white text-2xl focus:outline-none"
+                        aria-label="Close Sidebar"
+                    >
+                        &times;
+                    </button>
+                    </div>
+
+                    <div className="mt-4 space-y-4">
+                    {models.map((model) => (
+                        <button
+                        key={model.name}
+                        className={`block w-full p-3 text-left rounded-lg border transition-all duration-300 hover:scale-105 ${
+                            selectedModel === model.name
+                            ? "border-white bg-gradient-to-r from-black to-gray-800 text-white"
+                            : "hover:border-gray-600 hover:bg-gradient-to-r from-black to-gray-800"
+                        }`}
+                        onClick={() => {
+                            setSelectedModel(model.name);
+                            setIsSidebarOpen(false);
+                        }}
+                        >
+                        <div className="flex items-center gap-3">
+                            {model.icon}
+                            <span className="font-semibold">{model.name}</span>
+                        </div>
+                        <p className="text-white text-sm mt-1">{model.description}</p>
+                        </button>
+                    ))}
+                    </div>
+                </div>
+                )}
 
             <main className="flex-1 p-8 overflow-auto h-screen">
                 <h1 className="text-3xl font-bold">{selectedModel}</h1>

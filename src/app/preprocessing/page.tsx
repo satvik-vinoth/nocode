@@ -297,16 +297,18 @@ export default function PreprocessingPage() {
         <div className="h-screen bg-gradient-to-r from-black to-gray-1000 text-white">
             <Header></Header>
             <div className="flex border-t border-t-gray-600 border-t-3 mt-18">
-            <aside className="w-72 min-w-72 p-6 flex-shrink-0 h-screen overflow-y-auto border-r border-r-gray-600 border-r-3">
-                <h2 className="text-xl font-bold text-white">Preprocessing Steps</h2>
-                <ul className="mt-4 space-y-4 text-gray-300">
-                    <li className="border border-gray-700 p-3 rounded-lg"><a  href="#DatasetStatistics">Dataset Statistics</a></li>
-                    <li className="border border-gray-700 p-3 rounded-lg"><a  href="#Handle missing values">Handle missing values</a></li>
-                    <li className="border border-gray-700 p-3 rounded-lg"><a  href="#Categorical Encoding">Categorical Encoding</a></li>
-                    <li className="border border-gray-700 p-3 rounded-lg"><a  href="#Feature Scaling">Feature Scaling</a></li>
-                    <li className="border border-gray-700 p-3 rounded-lg"><a  href="#Data Splitting">Data Splitting</a></li>
-                </ul>
-            </aside>
+            <div className="hidden md:block">
+                <aside className="w-72 min-w-72 p-6 flex-shrink-0 h-screen overflow-y-auto border-r border-r-gray-600 border-r-3">
+                    <h2 className="text-xl font-bold text-white">Preprocessing Steps</h2>
+                    <ul className="mt-4 space-y-4 text-gray-300">
+                        <li className="border border-gray-700 p-3 rounded-lg"><a  href="#DatasetStatistics">Dataset Statistics</a></li>
+                        <li className="border border-gray-700 p-3 rounded-lg"><a  href="#Handle missing values">Handle missing values</a></li>
+                        <li className="border border-gray-700 p-3 rounded-lg"><a  href="#Categorical Encoding">Categorical Encoding</a></li>
+                        <li className="border border-gray-700 p-3 rounded-lg"><a  href="#Feature Scaling">Feature Scaling</a></li>
+                        <li className="border border-gray-700 p-3 rounded-lg"><a  href="#Data Splitting">Data Splitting</a></li>
+                    </ul>
+                </aside>
+            </div>
             <main className="flex-1 p-8 overflow-auto h-screen">
                 <h1 className="text-3xl font-bold">Data Preprocessing</h1>
 
