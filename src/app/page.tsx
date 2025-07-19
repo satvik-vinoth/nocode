@@ -10,19 +10,17 @@ export default function Home() {
     return (
         <div className="flex flex-col bg-gradient-to-r from-black to-gray-800 min-h-screen">
             <Header />
-
-            {/* Hero Section */}
-            <div className="flex  flex-row items-center justify-between pt-auto lg:pt-18">
-                <div className="w-[40%] text-center text-left  mb-[3%]">
-                    <h2 className="text-3xl sm:text-5xl font-bold text-white break-words text-balance pl-[35%]">
+            <div className="flex  flex-col sm:flex-row items-center justify-between pt-18">
+                <div className="w-full sm:w-[40%] text-center sm:text-left mb-[3%]">
+                    <h2 className="text-3xl sm:text-5xl font-bold text-white break-words text-balance sm:pl-[35%]">
                         Transform Data into
                     </h2>
-                    <h2 className="text-3xl sm:text-5xl font-bold text-white break-words text-balance pl-[33%]">
+                    <h2 className="text-3xl sm:text-5xl font-bold text-white break-words text-balance sm:pl-[33%]">
                         <span className="inline-block max-w-[90%]  lg:mx-0">
                             <FlipWords words={words} />
                         </span>
                     </h2>
-                    <div className="mt-6 pl-[35%]">
+                    <div className="mt-6 sm:pl-[35%]">
                         <Link href="/about">
                             <button className=" bg-gradient-to-r from-purple-600 to-purple-900 text-white px-6 py-3 rounded-lg text-lg font-bold shadow-lg hover:scale-105 transition-transform ">
                                 Get Started
@@ -32,10 +30,10 @@ export default function Home() {
                 </div>
 
                 {/* Right Animation Section */}
-                <div className="w-[60%] flex items-center justify-center h-full">
+                <div className="w-full sm:w-[60%] flex items-center justify-center sm:h-full">
                     <BackgroundGradientAnimation >
 
-                        <div className="text-white font-bold px-4 text-right text-2xl pl-[33%] mt-[59%] mr-[20%] sm:text-5xl sm:mt-[22%] h-full">
+                        <div className="text-white font-bold px-4 text-center sm:text-right text-3xl pl-[33%] mt-[39%] mr-[20%] sm:text-5xl sm:mt-[22%] ">
                             <p className="bg-clip-text text-transparent bg-white drop-shadow-2xl ">
                                 Upload dataset, select model, let AI do the work.
                             </p>
