@@ -193,7 +193,7 @@ export default function Prep_class() {
         try {
             const formData = new FormData();
             formData.append("file", datasetFile);
-            formData.append("method", scalingMethod); // "standard" or "minmax"
+            formData.append("method", scalingMethod); 
             formData.append("targetVariable", targetVariable);
     
             const response = await axios.post(`${baseURL}/api/scaling`, formData, {

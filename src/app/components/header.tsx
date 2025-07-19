@@ -35,10 +35,9 @@ export default function Header() {
 
   return (
     <div className="flex w-full items-center fixed top-0 left-0 right-0 z-50 bg-black text-white">
-      {/* Brand */}
+
       <div className={`pl-7 md:pl-45 pr-4 text-3xl font-bold ${orbitron.className}`}>NOCODE</div>
 
-      {/* Desktop Menu (unchanged) */}
       <div className="hidden md:flex md:pl-34">
         <Menu setActive={setActive}>
           <HoveredLink href="/">Home</HoveredLink>
@@ -70,14 +69,12 @@ export default function Header() {
         </Menu>
       </div>
 
-      {/* Mobile Menu Button */}
       <div className="ml-auto pr-4 md:hidden">
         <button onClick={() => setIsMobileOpen(!isMobileOpen)}>
           {isMobileOpen ? <X size={24} /> : <MenuIcon size={24} />}
         </button>
       </div>
 
-      {/* Mobile Dropdown Menu */}
         {isMobileOpen && (
         <div className="absolute top-full left-0 w-full bg-black md:hidden z-40 max-h-[80vh] overflow-y-auto">
             <div className="flex flex-col space-y-4 p-4">

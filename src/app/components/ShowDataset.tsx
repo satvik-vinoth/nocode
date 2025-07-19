@@ -63,8 +63,7 @@ const ShowDataset: React.FC<ShowDatasetProps> = ({ dataset }) => {
     {showFullDataset && (
                     <div className="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center p-6 z-50">
                         <h2 className="text-2xl font-bold text-white mb-4">Full Dataset</h2>
-                        
-                        {/* Scrollable Dataset Table */}
+             
                         <div className="overflow-auto max-h-[80vh] w-11/12 bg-gray-800 p-4 rounded-lg border border-gray-700">
                             <table className="w-full border-collapse text-sm text-white">
                                 <thead>

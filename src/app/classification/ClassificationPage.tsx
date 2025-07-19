@@ -182,7 +182,7 @@ export default function ClassificationPage() {
                         {models.map((model) => (
                             <button
                                 key={model.name}
-                                className={`block w-full p-3 text-left rounded-lg border transition-all duration-300 transition-transform duration-300 hover:scale-105 ${
+                                className={`block w-full p-3 text-left rounded-lg border transition-all duration-300 transition-transform duration-300 hover:scale-105 cursor-pointer ${
                                     selectedModel === model.name 
                                     ? "border-white-600 bg-gradient-to-r from-black to-gray-800 text-white" 
                                     : "hover:border-gray-600 hover:bg-gradient-to-r from-black to-gray-800"

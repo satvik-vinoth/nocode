@@ -196,7 +196,7 @@ export default function PreprocessingPage() {
         try {
             const formData = new FormData();
             formData.append("file", datasetFile);
-            formData.append("method", scalingMethod); // "standard" or "minmax"
+            formData.append("method", scalingMethod); 
     
             const response = await axios.post(`${baseURL}/api/scaling`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },

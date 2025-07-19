@@ -190,7 +190,7 @@ export default function RegressionPage() {
                     {models.map((model) => (
                         <button
                             key={model.name}
-                            className={`block w-full p-3 text-left rounded-lg border transition-all duration-300 transition-transform duration-300 hover:scale-105 ${
+                            className={`block w-full p-3 text-left rounded-lg border transition-all duration-300 transition-transform duration-300 hover:scale-105 cursor-pointer ${
                                 selectedModel === model.name 
                                 ? "border-white-600 bg-gradient-to-r from-black to-gray-800 text-white" 
                                 : "hover:border-gray-600 hover:bg-gradient-to-r from-black to-gray-800"
@@ -346,7 +346,7 @@ export default function RegressionPage() {
                 </div>
 
                 {result && (
-                    <div className="mt-10 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-6 shadow-xl text-gray-100 w-full max-w-3xl mx-auto">
+                    <div className="mt-10 rounded-xl bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900 p-6 shadow-xl text-gray-100 w-full  mx-auto">
                         <h2 className="text-2xl font-bold text-indigo-400 mb-4">Model Results</h2>
                         
                         <div className="space-y-2 text-sm md:text-base">

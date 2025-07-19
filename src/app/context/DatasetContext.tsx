@@ -35,10 +35,9 @@ type DatasetContextType = {
   ) => void;
 };
 
-// Create context
+
 const DatasetContext = createContext<DatasetContextType | undefined>(undefined);
 
-// Provider component
 type Props = { children: ReactNode };
 
 export const DatasetProvider = ({ children }: Props) => {
@@ -91,7 +90,6 @@ export const DatasetProvider = ({ children }: Props) => {
   );
 };
 
-// Hook to consume context
 export const useDataset = (): DatasetContextType => {
   const context = useContext(DatasetContext);
   if (!context) {

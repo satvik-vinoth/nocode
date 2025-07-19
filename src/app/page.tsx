@@ -22,14 +22,13 @@ export default function Home() {
                     </h2>
                     <div className="mt-6 sm:pl-[35%]">
                         <Link href="/about">
-                            <button className=" bg-gradient-to-r from-purple-600 to-purple-900 text-white px-6 py-3 rounded-lg text-lg font-bold shadow-lg hover:scale-105 transition-transform ">
+                            <button className=" bg-gradient-to-r from-purple-600 to-purple-900 text-white px-6 py-3 rounded-lg text-lg font-bold shadow-lg hover:scale-105 transition-transform cursor-pointer">
                                 Get Started
                             </button>
                         </Link>
                     </div>
                 </div>
 
-                {/* Right Animation Section */}
                 <div className="w-full sm:w-[60%] flex items-center justify-center sm:h-full">
                     <BackgroundGradientAnimation >
 
@@ -43,12 +42,9 @@ export default function Home() {
                 </div>
             </div>
 
-
-            {/* Features Section */}
             <div className="text-center px-6 py-20">
                 <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12">Why use NOCODE?</h2>
                 <div className="flex flex-wrap justify-center gap-8">
-                    {/* Feature 1 */}
                     <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-72 sm:w-80 text-center hover:scale-105 transition-transform">
                         <Upload size={40} className="text-purple-500 mx-auto" />
                         <h3 className="text-xl font-bold mt-4 text-white">Easy Data Upload</h3>
@@ -57,7 +53,6 @@ export default function Home() {
                         </p>
                     </div>
 
-                    {/* Feature 2 */}
                     <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-72 sm:w-80 text-center hover:scale-105 transition-transform">
                         <Cpu size={40} className="text-purple-500 mx-auto" />
                         <h3 className="text-xl font-bold mt-4 text-white">Automated ML</h3>
@@ -66,7 +61,6 @@ export default function Home() {
                         </p>
                     </div>
 
-                    {/* Feature 3 */}
                     <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-72 sm:w-80 text-center hover:scale-105 transition-transform">
                         <BarChart3 size={40} className="text-purple-500 mx-auto" />
                         <h3 className="text-xl font-bold mt-4 text-white">Visual Insights</h3>
@@ -77,7 +71,6 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Final CTA Paragraph */}
             <div className="text-neutral-400 text-base leading-relaxed px-6 lg:px-32 pb-20 text-center">
                 <p>
                     Our platform empowers you to upload your data, choose from state-of-the-art

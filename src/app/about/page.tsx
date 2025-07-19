@@ -45,15 +45,9 @@ export default function About() {
         try {
           const response = await fetch("/Iris.csv");
           const csvText = await response.text();
-      
-          // Create a File object from the fetched text
           const blob = new Blob([csvText], { type: "text/csv" });
           const sampleFile = new File([blob], "Iris.csv", { type: "text/csv" });
-      
-          // Set the file for any downstream logic expecting File
           setDatasetFile(sampleFile);
-      
-          // Parse the CSV and set dataset
           Papa.parse(csvText, {
             header: false,
             skipEmptyLines: true,
@@ -133,10 +127,10 @@ export default function About() {
 
         <div className="flex flex-col items-center justify-center min-h-screen text-white">
             <h1 className="text-4xl font-bold mb-10">Choose Your Model</h1>
-            <div className="flex gap-8">
+            <div className="flex flex-col md:flex-row gap-6 w-full px-4 md:px-0">
                 <button
                 onClick={() => handleSelect("regression")}
-                className="bg-gray-800 hover:bg-purple-600 text-white p-6 rounded-lg w-[50%] hover:scale-105 transition-all cursor-pointer"
+                className="bg-gray-800 hover:bg-purple-600 text-white p-6 rounded-lg w-full md:w-1/2 hover:scale-105 transition-all cursor-pointer"
                 >
                 <h2 className="text-2xl font-semibold">Regression</h2>
                 <p className="text-sm text-gray-300 mt-2">Predict numbers (e.g., price, score).</p>
@@ -144,21 +138,19 @@ export default function About() {
 
                 <button
                 onClick={() => handleSelect("classification")}
-                className="bg-gray-800 hover:bg-pink-600 text-white p-6 rounded-lg w-[50%] hover:scale-105 transition-all cursor-pointer"
+                className="bg-gray-800 hover:bg-pink-600 text-white p-6 rounded-lg w-full md:w-1/2 hover:scale-105 transition-all cursor-pointer"
                 >
                 <h2 className="text-2xl font-semibold">Classification</h2>
                 <p className="text-sm text-gray-300 mt-2">Predict categories (e.g., spam/ham).</p>
                 </button>
             </div>
-            </div>
+        </div>
         
         
       </div>
       {showFullDataset && (
                     <div className="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center p-6 z-50">
                         <h2 className="text-2xl font-bold text-white mb-4">Full Dataset</h2>
-                        
-                        {/* Scrollable Dataset Table */}
                         <div className="overflow-auto max-h-[80vh] w-11/12 bg-gray-800 p-4 rounded-lg border border-gray-700">
                             <table className="w-full border-collapse text-sm text-white">
                                 <thead>
