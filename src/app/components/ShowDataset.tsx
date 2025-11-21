@@ -3,11 +3,12 @@ import { useState } from "react";
 import React from "react";
 
 interface ShowDatasetProps {
-  dataset: string[][] | null;
-  title?: string;
+    dataset: string[][] | null;
+    onDelete?: () => void; 
 }
+  
 
-const ShowDataset: React.FC<ShowDatasetProps> = ({ dataset }) => {
+export default function ShowDataset({ dataset, onDelete }: ShowDatasetProps) {
 
   const [showFullDataset, setShowFullDataset] = useState(false);
 
@@ -18,8 +19,9 @@ const ShowDataset: React.FC<ShowDatasetProps> = ({ dataset }) => {
 
   return (
     <div>
-    <div className="mt-4 max-h-60 overflow-auto border border-gray-600 rounded-md p-2">
-        <table className="w-full border-collapse text-sm min-w-max">
+    <div className="mt-4 max-h-60   rounded-md p-2 overflow-auto">
+       
+        <table className="w-full border-collapse border  border-gray-600 text-sm min-w-max ">
         <thead>
             {dataset && dataset.length > 0 && dataset[0] ? (
                 <tr className="bg-gray-700 text-white">
@@ -59,10 +61,19 @@ const ShowDataset: React.FC<ShowDatasetProps> = ({ dataset }) => {
     >
         Expand Dataset
     </button>
+    {onDelete &&
+        <button
+            className="ml-2 cursor-pointer bg-red-600 text-white border border-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 hover:scale-105 transition-transform duration-300"
+            onClick={() => onDelete?.()}
+            >
+            Delete Dataset
+        </button>
+    }
+
 
     {showFullDataset && (
                     <div className="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center p-6 z-50">
-                        <h2 className="text-2xl font-bold text-white mb-4">Full Dataset</h2>
+                        <h2 className="text-2xl font-bold text-white mb-4">Dataset Preview</h2>
              
                         <div className="overflow-auto max-h-[80vh] w-11/12 bg-gray-800 p-4 rounded-lg border border-gray-700">
                             <table className="w-full border-collapse text-sm text-white">
@@ -74,7 +85,7 @@ const ShowDataset: React.FC<ShowDatasetProps> = ({ dataset }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {dataset && dataset.map((row:string[], idx:number) => (
+                                    {dataset && dataset.slice(1).map((row:string[], idx:number) => (
                                         <tr key={idx} className="border-t border-gray-600">
                                             {row.map((cell:string, i:number) => (
                                                 <td key={i} className="p-2 border">{cell}</td>
@@ -96,5 +107,3 @@ const ShowDataset: React.FC<ShowDatasetProps> = ({ dataset }) => {
     </div>
   );
 };
-
-export default ShowDataset;

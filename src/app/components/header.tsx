@@ -1,14 +1,33 @@
 "use client";
-import { useState } from "react";
-import { HoveredLink, Menu, MenuItem } from "./ui/navbar-menu";
-import { orbitron } from "@/lib/fonts";
+import { useState,useEffect,useRef } from "react";
+import Link from "next/link";
 import { Menu as MenuIcon, X } from "lucide-react";
+import { orbitron } from "@/lib/fonts";
 
 export default function Header() {
-  const [active, setActive] = useState<string | null>(null);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const closeTimeout = useRef<NodeJS.Timeout | null>(null);
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const models = [
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await fetch(`${baseURL}/auth/status`, {
+          credentials: "include", 
+        });
+  
+        setIsLoggedIn(res.ok);
+      } catch {
+        setIsLoggedIn(false);
+      }
+    }
+    checkAuth();
+  }, []);
+  
+
+  const regressModels = [
     "Linear Regression",
     "Polynomial Regression",
     "Decision Tree Regression",
@@ -18,10 +37,10 @@ export default function Header() {
     "Lasso Regression",
     "K-Nearest Neighbors (KNN) Regression",
     "Gradient Boosting Regression (GBR)",
-    "XGBoost Regression"
+    "XGBoost Regression",
   ];
 
-  const model = [
+  const classifyModels = [
     "Logistic Regression",
     "Decision Tree Classifier",
     "Random Forest Classifier",
@@ -30,86 +49,195 @@ export default function Header() {
     "Naive Bayes",
     "Gradient Boosting Classifier (GBC)",
     "XGBoost Classifier",
-    "Ridge Classifier"
+    "Ridge Classifier",
   ];
 
+  const handleLogout = async () => {
+    await fetch(`${baseURL}/logout`, {
+      method: "POST",
+      credentials: "include"
+    });
+    
+    window.location.href = "/";
+    
+  }
+
   return (
-    <div className="flex w-full items-center fixed top-0 left-0 right-0 z-50 bg-black text-white">
+    <header className="w-full fixed top-0 left-0 right-0 z-50 bg-black text-white shadow-md">
+      <div className="flex items-center justify-between px-8 md:px-45 py-4">
 
-      <div className={`pl-7 md:pl-45 pr-4 text-3xl font-bold ${orbitron.className}`}>NOCODE</div>
+        <Link
+          href="/"
+          className={`text-3xl font-bold ${orbitron.className}`}
+        >
+          NOCODE
+        </Link>
 
-      <div className="hidden md:flex md:pl-34">
-        <Menu setActive={setActive}>
-          <HoveredLink href="/">Home</HoveredLink>
-          <HoveredLink href="/about">Upload</HoveredLink>
-          <MenuItem setActive={setActive} active={active} item="Regression">
-            <div className="flex flex-col space-y-4 text-sm z-100">
-              {models.map((model) => (
-                <HoveredLink
-                  key={model}
-                  href={`/regression?model=${encodeURIComponent(model)}`}
-                >
-                  {model}
-                </HoveredLink>
-              ))}
-            </div>
-          </MenuItem>
-          <MenuItem setActive={setActive} active={active} item="Classification">
-            <div className="flex flex-col space-y-4 text-sm z-100">
-              {model.map((model) => (
-                <HoveredLink
-                  key={model}
-                  href={`/classification?model=${encodeURIComponent(model)}`}
-                >
-                  {model}
-                </HoveredLink>
-              ))}
-            </div>
-          </MenuItem>
-        </Menu>
-      </div>
+        <nav className="hidden md:flex items-center space-x-8">
+          <Link href="/" className="hover:text-purple-400 transition">Home</Link>
+          <Link href="/about" className="hover:text-purple-400 transition">Upload</Link>
 
-      <div className="ml-auto pr-4 md:hidden">
-        <button onClick={() => setIsMobileOpen(!isMobileOpen)}>
-          {isMobileOpen ? <X size={24} /> : <MenuIcon size={24} />}
+          <div
+            className="relative group"
+            onMouseEnter={() => {
+              if (closeTimeout.current) clearTimeout(closeTimeout.current);
+              setOpenDropdown("regression");
+            }}
+            onMouseLeave={() => {
+              closeTimeout.current = setTimeout(() => {
+                setOpenDropdown(null);
+              }, 200); 
+            }}
+          >
+            <button className="hover:text-purple-400 transition">Regression</button>
+
+            {openDropdown === "regression" && (
+              <div className="absolute left-0 mt-5 w-70 bg-black shadow-lg rounded-lg p-3 max-h-80 overflow-y-auto border border-gray-700">
+                {regressModels.map((m) => (
+                  <Link
+                    key={m}
+                    href={`/regression?model=${encodeURIComponent(m)}`}
+                    className="block px-3 py-2 rounded-md text-sm hover:bg-gray-700"
+                  >
+                    {m}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div
+            className="relative group"
+            onMouseEnter={() => {
+              if (closeTimeout.current) clearTimeout(closeTimeout.current);
+              setOpenDropdown("classification");
+            }}
+            onMouseLeave={() => {
+              closeTimeout.current = setTimeout(() => {
+                setOpenDropdown(null);
+              }, 200); 
+            }}
+          >
+            <button className="hover:text-purple-400 transition">Classification</button>
+
+            {openDropdown === "classification" && (
+              <div className="absolute left-0 mt-5 w-64 bg-black shadow-lg rounded-lg p-3 max-h-80 overflow-y-auto border border-gray-700">
+                {classifyModels.map((m) => (
+                  <Link
+                    key={m}
+                    href={`/classification?model=${encodeURIComponent(m)}`}
+                    className="block px-3 py-2 rounded-md text-sm hover:bg-gray-700"
+                  >
+                    {m}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+          {!isLoggedIn && (
+          <Link
+            href="/login"
+            className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg cursor-pointer"
+          >
+            Login
+          </Link>
+        )}
+
+        {isLoggedIn && (
+          <>
+
+            <button
+              onClick={handleLogout}
+              className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg cursor-pointer"
+            >
+              Logout
+            </button>
+          </>
+        )}
+        </nav>
+
+        <button
+          className="md:hidden"
+          onClick={() => setIsMobileOpen(!isMobileOpen)}
+        >
+          {isMobileOpen ? <X size={26} /> : <MenuIcon size={26} />}
         </button>
       </div>
 
-        {isMobileOpen && (
-        <div className="absolute top-full left-0 w-full bg-black md:hidden z-40 max-h-[80vh] overflow-y-auto">
-            <div className="flex flex-col space-y-4 p-4">
-            <HoveredLink href="/" onClick={() => setIsMobileOpen(false)}>Home</HoveredLink>
-            <HoveredLink href="/about" onClick={() => setIsMobileOpen(false)}>Upload</HoveredLink>
+      {isMobileOpen && (
+        <nav className="md:hidden bg-black border-t border-gray-800 px-6 py-4 space-y-4 max-h-[75vh] overflow-y-auto">
 
-            <div className="text-white font-semibold">Regression</div>
-            <div className="flex flex-col space-y-2 text-sm">
-                {models.map((m) => (
-                <HoveredLink
-                    key={m}
-                    href={`/regression?model=${encodeURIComponent(m)}`}
-                    onClick={() => setIsMobileOpen(false)}
-                >
-                    {m}
-                </HoveredLink>
-                ))}
-            </div>
+          <Link
+            href="/"
+            className="block hover:text-purple-400"
+            onClick={() => setIsMobileOpen(false)}
+          >
+            Home
+          </Link>
 
-            <div className="text-white font-semibold mt-4">Classification</div>
-            <div className="flex flex-col space-y-2 text-sm">
-                {model.map((m) => (
-                <HoveredLink
-                    key={m}
-                    href={`/classification?model=${encodeURIComponent(m)}`}
-                    onClick={() => setIsMobileOpen(false)}
+          <Link
+            href="/about"
+            className="block hover:text-purple-400"
+            onClick={() => setIsMobileOpen(false)}
+          >
+            Upload
+          </Link>
+
+          <div>
+            <p className="font-semibold text-white mt-3">Regression</p>
+            <div className="mt-2 space-y-2">
+              {regressModels.map((m) => (
+                <Link
+                  key={m}
+                  href={`/regression?model=${encodeURIComponent(m)}`}
+                  className="block text-sm hover:text-purple-400"
+                  onClick={() => setIsMobileOpen(false)}
                 >
-                    {m}
-                </HoveredLink>
-                ))}
+                  {m}
+                </Link>
+              ))}
             </div>
+          </div>
+
+          <div>
+            <p className="font-semibold text-white mt-3">Classification</p>
+            <div className="mt-2 space-y-2">
+              {classifyModels.map((m) => (
+                <Link
+                  key={m}
+                  href={`/classification?model=${encodeURIComponent(m)}`}
+                  className="block text-sm hover:text-purple-400"
+                  onClick={() => setIsMobileOpen(false)}
+                >
+                  {m}
+                </Link>
+              ))}
             </div>
-        </div>
+          </div>
+
+          {!isLoggedIn && (
+          <Link
+            href="/login"
+            className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg cursor-pointer"
+          >
+            Login
+          </Link>
         )}
 
-    </div>
+        {isLoggedIn && (
+          <>
+
+            <button
+              onClick={handleLogout}
+              className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg cursor-pointer"
+            >
+              Logout
+            </button>
+          </>
+        )}
+
+        </nav>
+      )}
+    </header>
   );
 }
