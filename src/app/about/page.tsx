@@ -70,7 +70,7 @@ export default function About() {
     const loadSampleDataset = async () => {
     
       const res = await fetch(
-        `${baseURL}/dataset/clone/6920d2f61a92ef162a99a3ab`,
+        `${baseURL}/dataset/clone/69214589083918880edca70a`,
         {
           method: "POST",
           credentials: "include",
