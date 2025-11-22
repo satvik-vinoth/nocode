@@ -105,5 +105,10 @@ def auth_status(request: Request):
 @router.post("/logout")
 def logout():
     response = JSONResponse({"message": "Logged out"})
-    response.delete_cookie("access_token")
+    response.delete_cookie(
+        key="access_token",
+        path="/",
+        samesite="none",
+        secure=True,
+    )
     return response
